@@ -1,0 +1,62 @@
+﻿@page "/geolocation"
+@using BlazorWasm.shared
+
+@inject IGeolocationService Geolocation
+
+<PageTitle>Geolocation</PageTitle>
+
+<BingMap Position=@_position />
+
+<div class="page-container">
+    <div class="page-content">
+
+        <a style="pt-5" href="https://www.nuget.org/packages/Blazor.LocalStorage.WebAssembly"> Geolocation Nuget package - blazorators </a>
+
+        @if (_isLoading)
+        {
+            <p>This page demonstrates the source generated <code>Blazor.Geolocation.WebAssembly</code> package.</p>
+        }
+
+        @{
+            @if (_position is not null)
+            {
+                <div class="col-md-6">
+                    <table class="table">
+
+                        <tbody>
+                            <tr>
+                                <th scope="row">Position timestamp</th>
+                                <td>@(_position.TimestampAsUtcDateTime.ToLocalTime().ToString())</td>
+
+                            </tr>
+                            <tr>
+                                <th scope="row">latitude</th>
+                                <td>@(_position.Coords.Latitude)</td>
+
+                            </tr>
+                            <tr>
+                                <th scope="row">longitude</th>
+                                <td>@(_position.Coords.Longitude)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Position accurazy</th>
+                                <td> @(_position.Coords.Accuracy)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            }
+
+            @if (_positionError is not null)
+            {
+                <p>Error: @_positionError.Message)</p>
+            }
+        }
+    </div>
+</div>
+
+
+
+
+
+
