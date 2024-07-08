@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  blazorwasm:
+    image: blazorwasm-standalone:latest
+    build:
+      context: ./src
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"

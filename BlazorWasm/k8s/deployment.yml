@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blazorwasm-deployment
+  labels:
+    app: blazorwasm
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: blazorwasm
+  template:
+    metadata:
+      labels:
+        app: blazorwasm
+    spec:
+      containers:
+      - name: blazorwasm
+        image: blazorwasm-standalone:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
